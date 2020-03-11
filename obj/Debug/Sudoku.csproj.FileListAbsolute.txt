@@ -1,0 +1,20 @@
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\bin\Debug\Sudoku.exe.config
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\bin\Debug\Sudoku.exe
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\bin\Debug\Sudoku.pdb
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\obj\Debug\Sudoku.Form1.resources
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\obj\Debug\Sudoku.fValeursPossibles.resources
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\obj\Debug\Sudoku.Properties.Resources.resources
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.cache
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\obj\Debug\Sudoku.exe
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
+E:\Cours\CoursH20\INF11207\Sudoku\Sudoku\obj\Debug\Sudoku.csprojAssemblyReference.cache
+D:\POO2 Projects\Sudoku\Sudoku\bin\Debug\Sudoku.exe.config
+D:\POO2 Projects\Sudoku\Sudoku\bin\Debug\Sudoku.exe
+D:\POO2 Projects\Sudoku\Sudoku\bin\Debug\Sudoku.pdb
+D:\POO2 Projects\Sudoku\Sudoku\obj\Debug\Sudoku.csprojAssemblyReference.cache
+D:\POO2 Projects\Sudoku\Sudoku\obj\Debug\Sudoku.Form1.resources
+D:\POO2 Projects\Sudoku\Sudoku\obj\Debug\Sudoku.fValeursPossibles.resources
+D:\POO2 Projects\Sudoku\Sudoku\obj\Debug\Sudoku.Properties.Resources.resources
+D:\POO2 Projects\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.cache
+D:\POO2 Projects\Sudoku\Sudoku\obj\Debug\Sudoku.exe
+D:\POO2 Projects\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
