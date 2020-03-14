@@ -9,54 +9,61 @@ using System.Drawing; // Pour les couleurs
 namespace Sudoku
 {
     #region Documentation sur la classe Case
-    /// Une case du jeu de Sudoku est un objet qui hérite de Button. 
+
+    /// Une case du jeu de Sudoku est un objet qui hérite de Button.
     /// Pourquoi Button ?
     /// Elle hérite ainsi des propriétés : Parent, Left, Top, Width, Height,
     ///     et Text.
     /// Elle hérite aussi de
-    ///     BackColor : La couleur de fond qui désignera la région.                  
-    ///     MouseDown : Événement appelé lors d'un clic de bouton.     
-    ///         Lorsqu’on clique avec le bouton gauche sur la case, 
+    ///     BackColor : La couleur de fond qui désignera la région.
+    ///     MouseDown : Événement appelé lors d'un clic de bouton.
+    ///         Lorsqu’on clique avec le bouton gauche sur la case,
     ///         les valeurs possibles sont affichées à tour de rôle.
-    ///         Lorsqu’on clique avec le bouton droit, un formulaire est 
-    ///         affiché nous permettant de spécifier les valeurs possibles 
-    ///         pour cette case. 
+    ///         Lorsqu’on clique avec le bouton droit, un formulaire est
+    ///         affiché nous permettant de spécifier les valeurs possibles
+    ///         pour cette case.
     ///  Les autres champs de la classe sont :
-    ///     originale : un booléen indiquant si la valeur inscrite sur la 
-    ///                 case fait partie de la grille de départ ou si elle a été 
-    ///                 déduite par l’usager. 
+    ///     originale : un booléen indiquant si la valeur inscrite sur la
+    ///                 case fait partie de la grille de départ ou si elle a été
+    ///                 déduite par l’usager.
     ///                 Les valeurs originales sont inscrites en rouge et
     ///                 les valeurs déduites sont inscrites en noir.
-    ///     Valeur : une propriété qui permet de connaître ou de changer la valeur 
+    ///     Valeur : une propriété qui permet de connaître ou de changer la valeur
     ///              affichée sur la case.
-    ///     row, col et reg : les numéros de rangée, de colonne et de région de 
+    ///     row, col et reg : les numéros de rangée, de colonne et de région de
     ///              la case
     ///     tt: une référence sur une composante ToolTip qui affiche les valeurs
-    ///              possibles.    
-    ///     
-    /// Le composant ToolTip Windows Forms affiche du texte lorsque l'utilisateur 
-    /// pointe sur des contrôles. Il est possible de l'associer à n'importe quel 
-    /// contrôle. Par exemple, pour économiser de la place dans un formulaire, 
-    /// vous pouvez afficher une petite icône sur un bouton et utiliser un contrôle 
+    ///              possibles.
+    ///
+    /// Le composant ToolTip Windows Forms affiche du texte lorsque l'utilisateur
+    /// pointe sur des contrôles. Il est possible de l'associer à n'importe quel
+    /// contrôle. Par exemple, pour économiser de la place dans un formulaire,
+    /// vous pouvez afficher une petite icône sur un bouton et utiliser un contrôle
     /// ToolTip pour expliquer la fonction de ce bouton.
-    /// Les principales méthodes du composant ToolTip sont SetToolTip et GetToolTip. 
-    /// Vous pouvez utiliser la méthode SetToolTip pour définir les info-bulles 
-    /// affichées pour des contrôles. Pour plus de détails, voir les propriétés de la 
+    /// Les principales méthodes du composant ToolTip sont SetToolTip et GetToolTip.
+    /// Vous pouvez utiliser la méthode SetToolTip pour définir les info-bulles
+    /// affichées pour des contrôles. Pour plus de détails, voir les propriétés de la
     /// composante ToolTip placée sur le formulaire principal.
 
-    #endregion
+    #endregion Documentation sur la classe Case
+
     public class Case : Button
     {
         public int row, col;  // position de la case
         public int reg;       // région de la case (0 à 8)
+
         #region documentation de possible
+
         // Nous aurions pu déclarer « possible » comme un tableau de booléens,
         // un entier dont les bits 1 à 9 représenteraient une valeur ou d'une autre façon.
         // Il a été choisi d'utiliser une liste d'entiers tout simplement.
-        #endregion
-        List<int> possible;   // valeurs possibles pour cette case
-        int valeur;           // valeurs actuelle (0 --> vide)
-        List<CaseInfo> historique;
+
+        #endregion documentation de possible
+
+        private List<int> possible;   // valeurs possibles pour cette case
+        private int valeur;           // valeurs actuelle (0 --> vide)
+        private List<CaseInfo> historique;
+
         public int Valeur
         {
             get { return valeur; }
@@ -76,9 +83,11 @@ namespace Sudoku
                 else Text = valeur.ToString();
             }
         }
-        bool originale;       // La valeur ne peut être modifiée par un clic
-        ToolTip tt;           // Référence sur le ToolTip à tenir à jour
-        public Case(int r, int c, Panel p, int valeur, ToolTip t, 
+
+        private bool originale;       // La valeur ne peut être modifiée par un clic
+        private ToolTip tt;           // Référence sur le ToolTip à tenir à jour
+
+        public Case(int r, int c, Panel p, int valeur, ToolTip t,
                     List<CaseInfo> historique)
         {
             row = r; col = c;
@@ -113,7 +122,7 @@ namespace Sudoku
                 originale = true;
             }
             // Ajuster le tableau des valeurs possibles
-            // Si j'ai une valeur différente de 0 alors, toutes les autres 
+            // Si j'ai une valeur différente de 0 alors, toutes les autres
             //         valeurs sont impossibles.
             // Si j'ai 0 alors toutes les valeurs sont possibles
             possible = new List<int>();
@@ -125,7 +134,8 @@ namespace Sudoku
             SetToolTip();
             this.historique = historique;
         }
-        void SetToolTip()
+
+        private void SetToolTip()
         {
             // À partir des valeurs possibles, créer une chaine de caractères contenant
             // les valeurs possibles et affecter cette chaine au tooltip.
@@ -134,6 +144,7 @@ namespace Sudoku
             foreach (int i in possible) t += i.ToString();
             tt.SetToolTip(this, t);
         }
+
         private void Case_MouseDown(object sender, MouseEventArgs e)
         {
             // 1 - Commençons par nous prendre une référence sur la case cliquée.
@@ -158,14 +169,14 @@ namespace Sudoku
                 c.NextValue();
                 return;
             }
-            // Ici, c'est le bouton droit. 
+            // Ici, c'est le bouton droit.
             // On affiche un menu qui fournit et permet de gérer les valeurs possibles.
             if (c.originale) return;
-            // Ouvrir le menu contextuel 
+            // Ouvrir le menu contextuel
             // qui affiche les valeurs possibles et permet de changer cette liste.
             fValeursPossibles menu = new fValeursPossibles();
             // Cocher les entrées du menu selon la possibilité de chaque valeur
-            // Cela sera fait par le formulaire. On a juste à lui passer l'info 
+            // Cela sera fait par le formulaire. On a juste à lui passer l'info
             // pertinente soit la liste des valeurs possibles.
             menu.possible = possible;
             // Mettons la case en orange pour indiquer celle sélectionnée.
@@ -182,7 +193,8 @@ namespace Sudoku
             if (reg % 2 == 0) BackColor = Color.Aqua; // Régions 0,2,4,6,8
             else BackColor = Color.Beige;
         }
-        void NextValue()
+
+        private void NextValue()
         {
             // Affiche la prochaine valeur possible
             int pos = possible.IndexOf(valeur);
@@ -190,9 +202,10 @@ namespace Sudoku
             else if (pos == possible.Count - 1) Valeur = 0;
             else Valeur = possible[pos + 1];
         }
+
         public void SetInfo(CaseInfo info, bool orig)
         {
-            // Puisqu'on aura besoin de sauvegarder et charger des grilles, 
+            // Puisqu'on aura besoin de sauvegarder et charger des grilles,
             // on devra sauvegarder l'information pertinent sur les cases.
             // On aura aussi besoin de faire cela pour l'historique.
             // Cette fonction coppie donc l'info reçue d'un CaseInfo
@@ -205,6 +218,7 @@ namespace Sudoku
             // Reste maintenant à ajuster le contenu du tooltip
             SetToolTip();
         }
+
         public void Permettre(int v)
         {
             if (originale) return;
@@ -212,11 +226,12 @@ namespace Sudoku
             else possible.Add(v);
             SetToolTip();
         }
+
         public void Interdire(int v)
         {
             /// Indique que la valeur v ne peut être affectée à la case.
             /// On n'a qu'à la marquer comme non possible.
-            /// Si c'était la valeur actuelle, dans un but de cohérence, 
+            /// Si c'était la valeur actuelle, dans un but de cohérence,
             /// on affiche une autre valeur.
             if (v == 0) return; // On ne peut interdire la case vide.
             if ((v < 0) || (v > 9)) return;
@@ -225,9 +240,10 @@ namespace Sudoku
             if (v == valeur) NextValue();
             SetToolTip();
         }
+
         public void ReInit()
         {
-            /// Lorsqu'on charge une grille, il est nécessaire de réinitialiser les 
+            /// Lorsqu'on charge une grille, il est nécessaire de réinitialiser les
             /// cases. Cette méthode s'en charge pour la case.
             originale = false;
             // Ajuster le tableau des valeurs possibles
@@ -236,7 +252,8 @@ namespace Sudoku
             Valeur = 0;
             SetToolTip();
         }
-        public bool IsPossible(int i) 
-            { return possible.Contains(i); }
+
+        public bool IsPossible(int i)
+        { return possible.Contains(i); }
     }
 }
